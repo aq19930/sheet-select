@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f0f0f0;
+      }
+      h1 {
+        color: #333;
+      }
+      select {
+        padding: 10px;
+        width: 200px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Choose a Name</h1>
+    <select id="namesSelect">
+      <option>Loading...</option>
+    </select>
+
+    <script>
+      const apiUrl = 'https://script.google.com/a/macros/toyou.io/s/AKfycbxSg3LU-qCG5jIqmd8DEpt9gwCWt09E3RfddIYg-ePx8FIO4McI8maQuByTwe-Lvr_h/exec';
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const select = document.getElementById('namesSelect');
+          select.innerHTML = '';
+
+          data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.Name;
+            option.textContent = item.Name;
+            select.appendChild(option);
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    </script>
+  </body>
+</html>
